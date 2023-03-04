@@ -22,6 +22,6 @@ class ExampleUnitTest {
 
     @Test
     fun two_plus_two_equals5(){
-        assertEquals( 2+ 2, 5)
+        assertEquals( 2+ 2, 4)
     }
 }

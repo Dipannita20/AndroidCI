@@ -1,0 +1,81 @@
+package com.example.taskkeeper
+
+import android.content.res.Configuration
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.taskkeeper.ui.theme.TaskKeeperTheme
+
+class MainComposeActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            TaskKeeperTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(color = MaterialTheme.colors.background,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    SpecimenFacts("Android")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SpecimenFacts(name: String) {
+    var plantName by remember {mutableStateOf(value = "")}
+    var location by remember {mutableStateOf(value = "")}
+    var description by remember {mutableStateOf(value = "")}
+    var datePlanted by remember {mutableStateOf(value = "")}
+    val localContext = LocalContext.current
+    Column() {
+        OutlinedTextField(value = plantName,
+            onValueChange = { plantName = it },
+            label = { Text(text = stringResource(R.string.plantName)) },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(value = location,
+            onValueChange = { location = it },
+            label = { Text(text = stringResource(R.string.location)) },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(value = description,
+            onValueChange = { description = it },
+            label = { Text(text = stringResource(R.string.description)) },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(value = datePlanted,
+            onValueChange = { datePlanted = it },
+            label = { Text(text = stringResource(R.string.datePlanted)) },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Button(onClick = {
+            Toast.makeText(
+                localContext,
+                "$plantName $location $description $datePlanted",
+                Toast.LENGTH_LONG
+            ).show()
+        },
+            modifier = Modifier.fillMaxWidth()){ Text(text = "Save")}
+    }
+}
+
+@Preview(name = "Light Mode", showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name=" Dark mode")
+@Composable
+fun DefaultPreview() {
+    TaskKeeperTheme {
+        SpecimenFacts("Android")
+    }
+}

@@ -11,6 +11,11 @@
         android:theme="@style/Theme.TaskKeeper">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main_compose"
+            android:theme="@style/Theme.TaskKeeper.NoActionBar" />
+        <activity
+            android:name=".MainComposeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
